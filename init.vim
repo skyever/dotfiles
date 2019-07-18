@@ -254,7 +254,7 @@ endif
 
 """ Keyboard shortcuts
 """" Leader
-let mapleader=","
+let mapleader=";"
 nmap <Space> <Leader>
 vmap <Space> <Leader>
 
@@ -847,13 +847,14 @@ let g:ctrlp_extensions = ['funky']
 let g:ctrlp_funky_syntax_highlight = 1
 
 """" nerdtree
-nmap <leader>n :NERDTreeToggle<CR>
+nmap <leader>a :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 25
 """" tagbar
 nmap <leader>t :TagbarToggle<CR>
 let g:tagbar_width = 33
 """" Trailing whitespace
 map <leader><space> :FixWhitespace<cr>
+map <leader>; <C-]>
 
 """" YouCompleteMe
 "au BufEnter *.py nmap <c-]> :YcmCompleter GoTo<CR>
@@ -1084,6 +1085,14 @@ augroup title
   autocmd BufEnter * call SetTerminalTitle()
 augroup END
 
+
+function! StartUp()
+  if argc() == 0
+     NERDTree
+  end
+endfunction
+
+autocmd VimEnter * call StartUp()
 
 "" vim:foldmethod=expr:foldlevel=1
 "" vim:foldexpr=getline(v\:lnum)=~'^""'?'>'.(matchend(getline(v\:lnum),'""*')-2)\:'='
